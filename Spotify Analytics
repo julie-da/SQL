@@ -1,0 +1,39 @@
+#I downloaded Spotify data from Kaggl for this project. 
+#I created a table to insert the Spotify data.
+#I performed analytics on the data using SQL. 
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+#I inserted the Spotify Data .csv into the table.
+
+#I determined the average energy level of songs by each artist?
+SELECT artist_name, AVG(energy) as average_energy
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name;
+
+# I also determined the top 5 artists with the most tracks in the database?
+SELECT artist_name, count(track_id) as total_tracks
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY total_tracks DESC
+LIMIT 5;
